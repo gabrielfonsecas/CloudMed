@@ -1,0 +1,50 @@
+<!-- templates/500.html -->
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERRO 500</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"> 
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body> 
+    <header>
+        <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" href="{% url 'menu.html' %}"><b>Menu</b></a>
+                <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item" href="{% url 'nova_consulta' %}">Nova consulta</a>
+                    <a class="navbar-item" href="{% url 'consultas' %}">Consultas</a>
+                    <a class="navbar-item" href="{% url 'cadastro' %}">Cadastro de pacientes</a>
+                    <a class="navbar-item" href="{% url 'pacientes' %}">Pacientes</a>
+                </div>
+            </div>
+            <div class="navbar-end">
+              <div class="navbar-item">
+                  <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                      {% csrf_token %}
+                  </form>
+                  <a class="navbar-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      <span class="icon">
+                          <i class="fas fa-sign-out-alt"></i>
+                      </span>
+                      <span>SAIR</span>
+                  </a>
+              </div>
+          </div>
+        </nav>
+      </header>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title">ERЯO 500 - Erro Interno do Servidor</h1>
+            <p class="subtitle">Desculpe, ocorreu um erro interno no servidor.</p>
+            <a class="button is-primary" href="{% url 'menu' %}">Voltar para a página inicial</a>
+        </div>
+    </section>
+
+</body>
+</html>

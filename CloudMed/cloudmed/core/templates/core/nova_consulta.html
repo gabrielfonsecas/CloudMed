@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Consulta</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"> 
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="icon" type="image/x-icon" href="P.png">
+</head>
+<body>
+  <header>
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="{% url 'menu.html' %}"><b>Menu</b></a>
+            <div class="navbar-dropdown is-boxed">
+                <a class="navbar-item" href="{% url 'nova_consulta' %}">Nova consulta</a>
+                <a class="navbar-item" href="{% url 'consultas' %}">Consultas</a>
+                <a class="navbar-item" href="{% url 'cadastro' %}">Cadastro de pacientes</a>
+                <a class="navbar-item" href="{% url 'pacientes' %}">Pacientes</a>
+            </div>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+              <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                  {% csrf_token %}
+              </form>
+              <a class="navbar-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  <span class="icon">
+                      <i class="fas fa-sign-out-alt"></i>
+                  </span>
+                  <span>SAIR</span>
+              </a>
+          </div>
+      </div>
+    </nav>
+  </header>
+  <section class="hero is-primary is-fullheight">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns">
+            <div class="column">
+              <div class="card">
+                <header class="card-header">
+                  <p class="card-header-title">Nova Consulta</p>
+                </header>
+                <div class="card-content">
+                  <form method="post" action="{% url 'nova_consulta' %}">
+                    {% csrf_token %}
+                    <div class="field">
+                      <label class="label" for="paciente_consulta"
+                        >Paciente:</label
+                      >
+                      <div class="control">
+                        <div class="select">
+                          <select
+                            id="paciente_consulta"
+                            name="paciente_consulta"
+                            required
+                          >
+                            <option value="" disabled selected>
+                              Selecione o paciente
+                            </option>
+                            {% for paciente in pacientes %}
+                            <option value="{{ paciente.id_paciente }}">
+                              {{ paciente.nome }} {{ paciente.sobrenome }}
+                            </option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label class="label" for="data_consulta"
+                        >Data da Consulta:</label
+                      >
+                      <div class="control">
+                        <input
+                          class="input"
+                          type="date"
+                          id="data_consulta"
+                          name="data_consulta"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label class="label" for="anamnese">Anamnese:</label>
+                      <div class="control">
+                        <textarea
+                          class="textarea"
+                          id="anamnese"
+                          name="anamnese"
+                          required
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label class="label" for="peso">Peso (kg):</label>
+                      <div class="control">
+                        <input
+                          class="input"
+                          type="number"
+                          step="0.1"
+                          id="peso"
+                          name="peso"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label class="label" for="altura">Altura (cm):</label>
+                      <div class="control">
+                        <input
+                          class="input"
+                          type="number"
+                          step="0.1"
+                          id="altura"
+                          name="altura"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label class="label" for="observacao">Observação:</label>
+                      <div class="control">
+                        <textarea
+                          class="textarea"
+                          id="observacao"
+                          name="observacao"
+                          required
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="control">
+                      <button class="button is-primary" type="submit">
+                        Salvar Consulta
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+</body>
+</html>

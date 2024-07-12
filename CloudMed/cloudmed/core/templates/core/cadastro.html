@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de paciente</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"> 
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body> 
+  <header>
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="{% url 'menu.html' %}"><b>Menu</b></a>
+            <div class="navbar-dropdown is-boxed">
+                <a class="navbar-item" href="{% url 'nova_consulta' %}">Nova consulta</a>
+                <a class="navbar-item" href="{% url 'consultas' %}">Consultas</a>
+                <a class="navbar-item" href="{% url 'cadastro' %}">Cadastro de pacientes</a>
+                <a class="navbar-item" href="{% url 'pacientes' %}">Pacientes</a>
+            </div>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+              <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                  {% csrf_token %}
+              </form>
+              <a class="navbar-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  <span class="icon">
+                      <i class="fas fa-sign-out-alt"></i>
+                  </span>
+                  <span>SAIR</span>
+              </a>
+          </div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero is-primary is-fullheight">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">Cadastro Pacientes</p>
+              </header>
+
+              <div class="card-content">
+                <div class="content">
+                  <form action="{% url 'cadastro' %}" method="post">
+                      {% csrf_token %}
+
+                      <div class="field">
+                        <label class="label">Nome:</label>
+                        <div class="control">
+                          <input class="input" type="text" id="nome" name="nome">
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">Sobrenome:</label>
+                        <div class="control">
+                          <input class="input" type="text" id="sobrenome" name="sobrenome">
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">Data de nascimento:</label>
+                        <div class="control">
+                          <input class="input" type="date" id="data_nascimento" name="data_nascimento">
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">Sexo:</label>
+                        <div class="control">
+                          <div class="select">
+                            <select id="sexo" name="sexo">
+                              <option value="" hidden></option>
+                              <option value="masculino">Masculino</option>
+                              <option value="feminino">Feminino</option>
+                              <option value="outro">Outro</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">Tipo Sanguineo:</label>
+                        <div class="control">
+                          <div class="select">
+                            <select id="tipo_sanguineo" name="tipo_sanguineo">
+                              <option value="" hidden></option>
+                              <option value="a+">A+</option>
+                              <option value="a-">A-</option>
+                              <option value="b+">B+</option>
+                              <option value="b-">B-</option>
+                              <option value="ab+">AB+</option>
+                              <option value="ab-">AB-</option>
+                              <option value="o+">O+</option>
+                              <option value="o-">O-</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">CPF:</label>
+                        <div class="control">
+                          <input class="input" type="text" id="cpf" name="cpf" maxlength="11">
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">RG:</label>
+                        <div class="control">
+                          <input class="input" type="text" id="rg" name="rg" maxlength="7">
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">Telefone:</label>
+                        <div class="control">
+                          <input class="input" type="tel" id="telefone" name="telefone" maxlength="12">
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">Endereço:</label>
+                        <div class="control">
+                          <textarea class="textarea" id="endereco" name="endereco"></textarea>
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">Nome do responsável:</label>
+                        <div class="control">
+                          <input class="input" type="text" id="responsavel" name="responsavel">
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">CPF do Responsável:</label>
+                        <div class="control">
+                          <input class="input" type="text" id="cpf_responsavel" name="cpf_responsavel" maxlength="11">
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <label class="label">RG do Responsável:</label>
+                        <div class="control">
+                          <input class="input" type="text" id="rg_responsavel" name="rg_responsavel" maxlength="7">
+                        </div>
+                      </div>
+
+                      <div class="field is-grouped">
+                        <div class="control">
+                          <button class="button is-link" type="submit">Salvar</button>
+                        </div>
+                        <div class="control">
+                          <a class="button is-link is-light" href="{% url 'pacientes' %}">Cancelar</a>
+                        </div>
+                      </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        // Obtém os valores dos campos do formulário
+        const nome = document.getElementById('nome').value;
+        const sobrenome = document.getElementById('sobrenome').value;
+        const dataNascimento = document.getElementById('data_nascimento').value;
+        const sexo = document.getElementById('sexo').value;
+        const tipoSanguineo = document.getElementById('tipo_sanguineo').value;
+        const cpf = document.getElementById('cpf').value;
+        const rg = document.getElementById('rg').value;
+        const telefone = document.getElementById('telefone').value;
+        const endereco = document.getElementById('endereco').value;
+        const responsavel = document.getElementById('responsavel').value;
+        const cpfResponsavel = document.getElementById('cpf_responsavel').value;
+        const rgResponsavel = document.getElementById('rg_responsavel').value;
+
+        // Formata os campos CPF, RG e Telefone
+        const cpfFormatado = formatarCPF(cpf);
+        const rgFormatado = formatarRG(rg);
+        const telefoneFormatado = formatarTelefone(telefone);
+        const cpfResponsavelFormatado = formatarCPF(cpfResponsavel);
+        const rgResponsavelFormatado = formatarRG(rgResponsavel);
+
+        // Validações
+        if (!validarCPF(cpfFormatado)) {
+            alert('CPF do paciente inválido.');
+            return;
+        }
+
+        if (!validarCPF(cpfResponsavelFormatado)) {
+            alert('CPF do responsável inválido.');
+            return;
+        }
+
+        if (cpfFormatado === cpfResponsavelFormatado) {
+            alert("O CPF do paciente não pode ser igual ao CPF do responsável.");
+            return;
+        }
+
+        // Verificar CPF único (requisição AJAX)
+        const cpfValido = await validarCPFUnico(cpfFormatado); 
+        if (!cpfValido) {
+            alert('CPF de paciente já cadastrado.');
+            return;
+        }
+
+        // Verificar CPF do responsável (requisição AJAX)
+        const cpfResponsavelValido = await validarCPFResponsavelUnico(cpfResponsavelFormatado);
+        if (!cpfResponsavelValido) {
+            alert('CPF do responsável já cadastrado como CPF de paciente.');
+            return;
+        }
+
+        // Atualiza os valores dos campos com os formatos corretos
+        document.getElementById('cpf').value = cpfFormatado;
+        document.getElementById('rg').value = rgFormatado;
+        document.getElementById('telefone').value = telefoneFormatado;
+        document.getElementById('cpf_responsavel').value = cpfResponsavelFormatado;
+        document.getElementById('rg_responsavel').value = rgResponsavelFormatado;
+
+        // Envia o formulário se todas as validações passarem
+        form.submit();
+    });
+
+    // Formatação em tempo real para CPF, RG e telefone (paciente e responsável)
+    const inputs = document.querySelectorAll('#cpf, #rg, #telefone, #cpf_responsavel, #rg_responsavel');
+    inputs.forEach(input => {
+        input.addEventListener('input', function () {
+            if (this.id.startsWith('cpf') && this.value.length <= 14) {
+                this.value = formatarCPF(this.value);
+            } else if (this.id.startsWith('rg') && this.value.length <= 9) {
+                this.value = formatarRG(this.value);
+            } else if (this.id === 'telefone' && this.value.length <= 15) {
+                this.value = formatarTelefone(this.value);
+            }
+        });
+    });
+
+    // Funções de formatação
+    function formatarCPF(cpf) {
+        cpf = cpf.replace(/\D/g, '');
+        return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    }
+
+    function formatarRG(rg) {
+        rg = rg.replace(/\D/g, '');
+        return rg.replace(/(\d{1})(\d{3})(\d{3})/, '$1.$2.$3');
+    }
+
+    function formatarTelefone(telefone) {
+        telefone = telefone.replace(/\D/g, '');
+        if (telefone.length === 11) {
+            return telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        } else if (telefone.length === 10) {
+            return telefone.replace(/(\d{5})(\d{4})/, '$1-$2');
+        }
+        return telefone;
+    }
+
+    // Função de validação de CPF
+    function validarCPF(cpf) {
+        cpf = cpf.replace(/\D/g, '');
+
+        if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+            return false;
+        }
+
+        let soma = 0;
+        let resto;
+
+        for (let i = 1; i <= 9; i++) {
+            soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+        }
+
+        resto = (soma * 10) % 11;
+
+        if ((resto === 10) || (resto === 11)) {
+            resto = 0;
+        }
+
+        if (resto !== parseInt(cpf.substring(9, 10))) {
+            return false;
+        }
+
+        soma = 0;
+
+        for (let i = 1; i <= 10; i++) {
+            soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+        }
+
+        resto = (soma * 10) % 11;
+
+        if ((resto === 10) || (resto === 11)) {
+            resto = 0;
+        }
+
+        return resto === parseInt(cpf.substring(10, 11));
+    }
+
+    // Função para verificar CPF único (requisição AJAX)
+    async function validarCPFUnico(cpf) {
+        const response = await fetch(`/verificar_cpf/?cpf=${cpf}`); 
+        const data = await response.json();
+        return !data.cpf_existe;
+    }
+
+    // Função para verificar CPF do responsável (requisição AJAX)
+    async function validarCPFResponsavelUnico(cpfResponsavel) {
+        const response = await fetch(`/verificar_cpf_responsavel/?cpf_responsavel=${cpfResponsavel}`);
+        const data = await response.json();
+        return !data.cpf_responsavel_existe;
+    }
+});
+</script>
+</body>
+</html>

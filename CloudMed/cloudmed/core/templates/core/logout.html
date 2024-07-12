@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"> 
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="icon" type="image/x-icon" href="P.png">
+</head>
+<body>
+    <section class="hero is-primary is-fullheight">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns is-centered">
+                <div class="box">
+                    <h1>Você saiu com sucesso!</h1>
+                    <p>Esperamos te ver novamente em breve.</p>
+                    <br>
+                    <a class="button is-link" href="{% url 'index.html' %}">Entrar novamente</a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</body>
+</html>

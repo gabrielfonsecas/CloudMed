@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"> 
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="icon" type="image/x-icon" href="P.png">
+</head>
+<body>
+  <header>
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="{% url 'menu.html' %}"><b>Menu</b></a>
+            <div class="navbar-dropdown is-boxed">
+                <a class="navbar-item" href="{% url 'nova_consulta' %}">Nova consulta</a>
+                <a class="navbar-item" href="{% url 'consultas' %}">Consultas</a>
+                <a class="navbar-item" href="{% url 'cadastro' %}">Cadastro de pacientes</a>
+                <a class="navbar-item" href="{% url 'pacientes' %}">Pacientes</a>
+            </div>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+              <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                  {% csrf_token %}
+              </form>
+              <a class="navbar-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  <span class="icon">
+                      <i class="fas fa-sign-out-alt"></i>
+                  </span>
+                  <span>SAIR</span>
+              </a>
+          </div>
+      </div>
+    </nav>
+  </header>
+
+    <section class="hero is-primary is-fullheight">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns is-centered">
+              <div class="column is-half">
+                <div class="card">
+                <header class="card-header">
+                  <p class="card-header-title">Menu</p>
+                </header>
+                <div class="card-content">
+                  <div class="content">
+                    <nav>
+                      <p class="has-text-centered">
+                        <a href="{% url 'cadastro' %}" class="button is-primary">Cadastrar paciente</a>
+                        <a href="{% url 'nova_consulta' %}" class="button is-primary">Nova Consulta</a>
+                        <a href="{% url 'consultas' %}" class="button is-primary">Consultas</a>
+                        <a href="{% url 'pacientes' %}" class="button is-primary">Pacientes</a>
+                      </p>
+                    </nav>
+                  </div>
+                </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+    </section>
+</body>
+</html>
